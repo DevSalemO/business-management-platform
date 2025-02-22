@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { fetchProducts } from '../services/api';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { fetchProducts } from "../services/api";
+import { Link } from "react-router-dom";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -12,7 +12,7 @@ export default function Products() {
         const data = await fetchProducts();
         setProducts(data);
       } catch (error) {
-        console.error('Error loading products:', error);
+        console.error("Error loading products:", error);
       } finally {
         setLoading(false);
       }
@@ -21,19 +21,21 @@ export default function Products() {
     loadProducts();
   }, []);
 
-//delete prod
+  //delete prod
   const deleteProduct = async (id) => {
-	try {
-	  await fetch(`https://fakestoreapi.com/products/${id}`, {
-		method: 'DELETE',
-	  });
-	  // Remove the deleted product from the state
-	  setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
-	} catch (error) {
-	  console.error('Error deleting product:', error);
-	}
+    try {
+      await fetch(`https://fakestoreapi.com/products/${id}`, {
+        method: "DELETE",
+      });
+      // Remove the deleted product from the state
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product.id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
   };
-  
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
@@ -48,15 +50,19 @@ export default function Products() {
         <div className="sm:flex-auto">
           <h1 className="text-2xl font-semibold text-gray-900">Products</h1>
           <p className="mt-2 text-sm text-gray-700">
-            A list of all products in your store including their name, price, and category.
+            A list of all products in your store including their name, price,
+            and category.
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-			<Link to="/products/add">
- 				<button type="button" className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto">
-    				Add Product
-  				</button>
-			</Link>
+          <Link to="/products/add">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
+            >
+              Add Product
+            </button>
+          </Link>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -66,16 +72,28 @@ export default function Products() {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                    >
                       Product
                     </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
                       Category
                     </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
                       Price
                     </th>
-                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                    <th
+                      scope="col"
+                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                    >
                       <span className="sr-only">Actions</span>
                     </th>
                   </tr>
@@ -86,13 +104,18 @@ export default function Products() {
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                         <div className="flex items-center">
                           <div className="h-10 w-10 flex-shrink-0">
-                            <img className="h-10 w-10 rounded-full object-cover" src={product.image} alt="" />
+                            <img
+                              className="h-10 w-10 rounded-full object-cover"
+                              src={product.image}
+                              alt=""
+                            />
                           </div>
 
                           <div className="ml-4">
-                            <div className="font-medium text-gray-900">{product.title}</div>
+                            <div className="font-medium text-gray-900">
+                              {product.title}
+                            </div>
                           </div>
-						  
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -102,18 +125,22 @@ export default function Products() {
                         ${product.price.toFixed(2)}
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <button className="text-blue-600 hover:text-blue-900 mr-4">Edit</button>
+                        <button className="text-blue-600 hover:text-blue-900 mr-4">
+                          Edit
+                        </button>
 
-						<Link to={`/products/${product.id}`}>
-  						<button className="text-blue-600 hover:text-black hover:bg-sky-500 mr-4">View</button>
-						</Link>
+                        <Link to={`/products/${product.id}`}>
+                          <button className="text-blue-600 hover:text-black hover:bg-sky-500 mr-4">
+                            View
+                          </button>
+                        </Link>
 
-  						<button
-							onClick={() => deleteProduct(product.id)}
-							className="text-rose-600 hover:text-white hover:bg-red-600">
-								Delete
- 						</button>
-
+                        <button
+                          onClick={() => deleteProduct(product.id)}
+                          className="text-rose-600 hover:text-white hover:bg-red-600"
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}
