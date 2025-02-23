@@ -3,32 +3,17 @@ import SalesOverviewChart from "../components/dashboard/SalesOverviewChart";
 import CategoryDistributionChart from "../components/dashboard/CategoryDistributionChart";
 import SalesChannelChart from "../components/dashboard/SalesChannelChart";
 import { CSVLink } from "react-csv"; // Import react-csv
-import { useEffect, useState } from "react";
-import { fetchProducts } from "../services/api";
 
 const ExportButton = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const data = await fetchProducts();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error loading products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProducts();
-  }, []);
-
+  const data = [
+    { name: "Product 1", price: "$10", quantity: 5 },
+    { name: "Product 2", price: "$15", quantity: 3 },
+    
+  ];
 
   return (
     <div className="mb-6">
-      <CSVLink data={products} filename="export.csv">
+      <CSVLink data={data} filename="export.csv">
         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
           Export data
         </button>
