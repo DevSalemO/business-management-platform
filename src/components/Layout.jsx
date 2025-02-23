@@ -3,15 +3,15 @@ import Sidebar from './Sidebar';
 
 export default function Layout() {
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
       <Sidebar />
-      <div className="flex-1 overflow-auto">
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 overflow-y-auto">
+        <div className="container mx-auto px-6 py-8">
           <div className="bg-white rounded-lg shadow-sm p-6">
             <Outlet />
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
