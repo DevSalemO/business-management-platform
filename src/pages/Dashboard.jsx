@@ -1,8 +1,36 @@
+
+import SalesOverviewChart from "../components/dashboard/SalesOverviewChart";
+import CategoryDistributionChart from "../components/dashboard/CategoryDistributionChart";
+import SalesChannelChart from "../components/dashboard/SalesChannelChart";
+import { CSVLink } from "react-csv"; // Import react-csv
+
+const ExportButton = () => {
+  const data = [
+    { name: "Product 1", price: "$10", quantity: 5 },
+    { name: "Product 2", price: "$15", quantity: 3 },
+    
+  ];
+
+  return (
+    <div className="mb-6">
+      <CSVLink data={data} filename="export.csv">
+        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
+          Export data
+        </button>
+      </CSVLink>
+    </div>
+  );
+};
+
 export default function Dashboard() {
   return (
+        
     <div>
       <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+
+      <ExportButton />
       <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      
         {/* Sample dashboard cards */}
         <div className="bg-white overflow-hidden shadow rounded-lg">
           <div className="p-5">
@@ -57,6 +85,13 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+            <main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
+            <div className='grid grid-cols-30 lg:grid-cols-30 gap-8'>
+					<SalesOverviewChart />
+					<CategoryDistributionChart />
+				 	<SalesChannelChart />
+				     </div>
+            </main>
       </div>
     </div>
   );
