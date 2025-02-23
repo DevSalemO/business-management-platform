@@ -90,27 +90,9 @@ src/
 └── utils/             # Utility functions
 ```
 
-## 🔐 Authentication
 
-The platform uses a secure authentication system with the following features:
-- Email and password authentication
-- Protected routes
-- Session management
-- Password validation and security
 
-## 📱 Responsive Design
 
-The application is fully responsive and optimized for:
-- Desktop computers
-- Tablets
-- Mobile devices
-
-## 🔧 Configuration
-
-You can customize various aspects of the application:
-- Theme colors in `tailwind.config.js`
-- Environment variables in `.env`
-- API endpoints in configuration files
 
 ## 🤝 Contributing
 
@@ -120,17 +102,9 @@ You can customize various aspects of the application:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📧 Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Project Link: [https://github.com/yourusername/business-management-platform](https://github.com/yourusername/business-management-platform)
-
-## 🙏 Acknowledgments
 
 - [React.js](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
