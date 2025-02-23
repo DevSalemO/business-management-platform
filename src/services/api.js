@@ -52,6 +52,10 @@ export const fetchOrders = async () => {
 
 export const createOrder = async (orderData) => {
   try {
+    // Generate a unique numeric ID using timestamp
+    // Using timestamp in milliseconds and a random number between 1-999
+    const uniqueId = parseInt(Date.now().toString().slice(-9) + Math.floor(Math.random() * 999 + 1).toString().padStart(3, '0'));
+
     // Get the specific user details
     const userResponse = await axios.get(`${API_URL}/users/${orderData.userId}`);
     const user = userResponse.data;
@@ -84,9 +88,10 @@ export const createOrder = async (orderData) => {
       }))
     });
 
-    // Return enhanced order data
+    // Return enhanced order data with our unique numeric ID
     return {
       ...response.data,
+      id: uniqueId, // Use our generated unique numeric ID
       user,
       totalPrice,
       products: orderData.products.map(product => ({
@@ -103,7 +108,11 @@ export const createOrder = async (orderData) => {
 
 export const deleteOrder = async (orderId) => {
   try {
-    await axios.delete(`${API_URL}/carts/${orderId}`);
+    // For orders from the API (usually smaller IDs), try to delete from API
+    // For our generated orders (larger IDs), just return success
+    if (orderId.toString().length <= 6) {
+      await axios.delete(`${API_URL}/carts/${orderId}`);
+    }
     return orderId;
   } catch (error) {
     console.error('Error deleting order:', error);
@@ -113,6 +122,20 @@ export const deleteOrder = async (orderId) => {
 
 export const fetchOrderById = async (orderId) => {
   try {
+    // For locally generated orders (longer IDs), get from localStorage
+    if (orderId.toString().length > 6) {
+      const savedOrders = localStorage.getItem('orders');
+      if (savedOrders) {
+        const orders = JSON.parse(savedOrders);
+        const order = orders.find(o => o.id === orderId);
+        if (order) {
+          return order; // Local orders already have all the details we need
+        }
+      }
+      throw new Error('Order not found in local storage');
+    }
+
+    // For API orders (shorter IDs), fetch from API
     const response = await axios.get(`${API_URL}/carts/${orderId}`);
     const order = response.data;
 
