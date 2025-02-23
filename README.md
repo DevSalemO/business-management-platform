@@ -69,15 +69,11 @@ cd business-management-platform
 2. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
 
 3. Start the development server:
 ```bash
-npm start
-# or
-yarn start
+npm run dev
 ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
