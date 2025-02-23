@@ -2,7 +2,25 @@
 
 A modern, responsive web application for managing business operations, including product management, order tracking, and sales analytics.
 
-## 🌟 Features
+## Sprints Graduation Project - Team One
+
+### 💻 Members and tasks
+- Salem: Sales & Order Tracking + Overall Fixes
+- Nouf: Layout and Styling
+- Maryam: Product Inv Module
+- Tiba: Dashboard & Charts
+- Mehaina: Dashboard
+- Kefah: User Management Module
+
+_Other related tasks and cleanup were shared amongst members for simplicity_
+
+## 🌟 Application Features
+
+### 📼 Video Demo of the Application
+
+```
+https://www.youtube.com/watch?v=36puDqm--os
+```
 
 ### 📊 Dashboard
 - Real-time sales overview with interactive charts
@@ -44,18 +62,23 @@ A modern, responsive web application for managing business operations, including
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/business-management-platform.git
+git clone https://github.com/DevSalemO/business-management-platform.git
 cd business-management-platform
 ```
 
 2. Install dependencies:
 ```bash
 npm install
-
+# or
+yarn install
+```
 
 3. Start the development server:
 ```bash
-npm run dev
+npm start
+# or
+yarn start
+```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
@@ -85,23 +108,3 @@ src/
 └── utils/             # Utility functions
 ```
 
-
-
-
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-
-
-- [React.js](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Chart.js](https://www.chartjs.org/)
-- [Heroicons](https://heroicons.com/)
