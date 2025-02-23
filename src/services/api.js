@@ -194,3 +194,113 @@ export const fetchUsers = async () => {
     throw error;
   }
 };
+
+// Users CRUD operations
+export const createUser = async (userData) => {
+  try {
+    const uniqueId = parseInt(Date.now().toString().slice(-9) + Math.floor(Math.random() * 999 + 1).toString().padStart(3, '0'));
+    const newUser = {
+      id: uniqueId,
+      ...userData
+    };
+
+    // Store in localStorage
+    const savedUsers = localStorage.getItem('users') || '[]';
+    const users = JSON.parse(savedUsers);
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+
+    return newUser;
+  } catch (error) {
+    console.error('Error creating user:', error);
+    throw error;
+  }
+};
+
+export const updateUser = async (userId, userData) => {
+  try {
+    const savedUsers = localStorage.getItem('users') || '[]';
+    let users = JSON.parse(savedUsers);
+    
+    const index = users.findIndex(user => user.id === userId);
+    if (index !== -1) {
+      users[index] = { ...users[index], ...userData };
+      localStorage.setItem('users', JSON.stringify(users));
+      return users[index];
+    }
+    throw new Error('User not found');
+  } catch (error) {
+    console.error('Error updating user:', error);
+    throw error;
+  }
+};
+
+export const deleteUser = async (userId) => {
+  try {
+    const savedUsers = localStorage.getItem('users') || '[]';
+    let users = JSON.parse(savedUsers);
+    
+    users = users.filter(user => user.id !== userId);
+    localStorage.setItem('users', JSON.stringify(users));
+    
+    return userId;
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    throw error;
+  }
+};
+
+// Products CRUD operations
+export const createProduct = async (productData) => {
+  try {
+    const uniqueId = parseInt(Date.now().toString().slice(-9) + Math.floor(Math.random() * 999 + 1).toString().padStart(3, '0'));
+    const newProduct = {
+      id: uniqueId,
+      ...productData
+    };
+
+    // Store in localStorage
+    const savedProducts = localStorage.getItem('products') || '[]';
+    const products = JSON.parse(savedProducts);
+    products.push(newProduct);
+    localStorage.setItem('products', JSON.stringify(products));
+
+    return newProduct;
+  } catch (error) {
+    console.error('Error creating product:', error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (productId, productData) => {
+  try {
+    const savedProducts = localStorage.getItem('products') || '[]';
+    let products = JSON.parse(savedProducts);
+    
+    const index = products.findIndex(product => product.id === productId);
+    if (index !== -1) {
+      products[index] = { ...products[index], ...productData };
+      localStorage.setItem('products', JSON.stringify(products));
+      return products[index];
+    }
+    throw new Error('Product not found');
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw error;
+  }
+};
+
+export const deleteProduct = async (productId) => {
+  try {
+    const savedProducts = localStorage.getItem('products') || '[]';
+    let products = JSON.parse(savedProducts);
+    
+    products = products.filter(product => product.id !== productId);
+    localStorage.setItem('products', JSON.stringify(products));
+    
+    return productId;
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    throw error;
+  }
+};

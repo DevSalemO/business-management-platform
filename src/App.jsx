@@ -6,7 +6,6 @@ import Products from './pages/Products';
 import Users from './pages/Users';
 import SalesModule from './components/SalesModule';
 import ProductDetail from '/src/pages/Product-Inv/ProdDetail';
-import ProductForm from '/src/pages/Product-Inv/ProdForm';
 
 function App() {
   return (
@@ -16,8 +15,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="products" element={<Products />} />
-			<Route path="products/:id" element={<ProductDetail />} />
-			<Route path="products/add" element={<ProductForm />} />
+            <Route path="products/:id" element={<ProductDetail />} />
             <Route path="orders" element={<SalesModule />} />
             <Route path="users" element={<Users />} />
           </Route>

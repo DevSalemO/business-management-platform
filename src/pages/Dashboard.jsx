@@ -122,18 +122,37 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/products`);
-        const products = response.data;
+        // Fetch both products and carts data
+        const [productsResponse, cartsResponse] = await Promise.all([
+          axios.get(`${API_URL}/products`),
+          axios.get(`${API_URL}/carts`)
+        ]);
+        
+        const products = productsResponse.data;
+        const carts = cartsResponse.data;
+        
+        // Create product price lookup map
+        const productMap = products.reduce((acc, product) => {
+          acc[product.id] = product;
+          return acc;
+        }, {});
         
         // Calculate statistics
         const categories = new Set(products.map(product => product.category));
-        const totalValue = products.reduce((sum, product) => sum + product.price, 0);
+        
+        // Calculate total value from all cart sales
+        const totalValue = carts.reduce((total, cart) => {
+          return total + cart.products.reduce((cartTotal, product) => {
+            const productPrice = productMap[product.productId]?.price || 0;
+            return cartTotal + (productPrice * product.quantity);
+          }, 0);
+        }, 0);
 
         setProducts(products);
         setStats({
           totalProducts: products.length,
           totalCategories: categories.size,
-          totalValue: totalValue
+          totalValue: Number(totalValue.toFixed(2))
         });
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -209,7 +228,7 @@ export default function Dashboard() {
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 truncate">Total Value</dt>
                     <dd className="text-lg font-semibold text-gray-900">
-                      {loading ? "Loading..." : `$${stats.totalValue.toFixed(2)}`}
+                      {loading ? "Loading..." : `$${stats.totalValue}`}
                     </dd>
                   </dl>
                 </div>
